@@ -16,6 +16,7 @@
 #   4. En tjenestekonto med passord som aldri utløper og Contributor-rolle
 #   5. Eksterne konsulenter (gjester) har Contributor på hele abonnementet
 #   6. Kundestøtte har lesetilgang til hele abonnementet
+#   7. MFA er ikke påkrevd (security defaults er skrudd av)
 # =============================================================================
 set -euo pipefail
 
@@ -199,6 +200,15 @@ echo "grp-kundestotte:";   gi_azure_rolle "$G_KUNDE" Group Reader
 
 echo; echo "Gir Global Administrator..."
 for u in "$U_LARS" "$U_INGRID" "$U_PER"; do gi_global_admin "$u"; done
+
+echo; echo "Skrur av security defaults (MFA ikke påkrevd)..."
+if az rest --method patch --url "$GRAPH/policies/identitySecurityDefaultsEnforcementPolicy" \
+    --headers "Content-Type=application/json" --body '{"isEnabled": false}' -o none 2>/dev/null; then
+  echo "  + Security defaults er av"
+else
+  echo "  ! Fikk ikke lov fra Cloud Shell. Gjør det manuelt:"
+  echo "    Entra ID > Overview > Properties > Manage security defaults > Disabled"
+fi
 
 echo
 echo "Ferdig! Fjellvik Helse AS er satt opp i $DOMAIN."
