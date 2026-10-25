@@ -1,4 +1,4 @@
-# Never commit secrets or tenant details
+# Aldri legg hemmeligheter eller tenant-detaljer i repoet
 .env
 *.env
 *.pem

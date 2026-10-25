@@ -1,82 +1,82 @@
 # Azure GRC Lab
 
-**Compliance as code and IAM review for a fictional Norwegian company in Microsoft Azure.**
+**Compliance as code og IAM-gjennomgang for en fiktiv norsk bedrift i Microsoft Azure.**
 
-This project shows how I would approach a security assessment as a consultant: set up a realistic Azure environment, measure it against recognised frameworks, automate the evidence collection, and turn the findings into a report that management can act on.
+Dette prosjektet viser hvordan jeg ville gått frem som sikkerhetsrådgiver: sette opp et realistisk Azure-miljø, måle det mot anerkjente rammeverk, automatisere innsamlingen av dokumentasjon og gjøre funnene om til en rapport som ledelsen kan bruke.
 
-> **Status:** In progress. The roadmap below is updated as each phase is completed.
-
----
-
-## The scenario
-
-*Fjellvik Helse AS* is a fictional Norwegian company with around 40 employees that provides digital booking and follow-up services to physiotherapy clinics. It has recently moved its IT to Microsoft Azure. Nobody has looked properly at security since the migration, and management wants to know:
-
-> *"Where do we stand, and what should we fix first?"*
-
-The full company profile is in [`docs/01-company-profile.md`](docs/01-company-profile.md).
-
-**The company is fictional.** All users, data and names in this lab are made up.
+> **Status:** Under arbeid. Veikartet nedenfor oppdateres etter hvert som fasene blir ferdige.
 
 ---
 
-## What this project covers
+## Scenarioet
 
-| Area | What I do |
+*Fjellvik Helse AS* er en fiktiv norsk bedrift med rundt 40 ansatte som leverer digital timebestilling og oppfølging til fysioterapiklinikker. Bedriften har nylig flyttet IT-driften til Microsoft Azure. Ingen har sett ordentlig på sikkerheten etter flyttingen, og ledelsen vil vite:
+
+> *«Hvor står vi, og hva bør vi fikse først?»*
+
+Hele bedriftsprofilen ligger i [`docs/01-virksomhet.md`](docs/01-virksomhet.md).
+
+**Bedriften er fiktiv.** Alle brukere, data og navn i denne laben er oppdiktet.
+
+---
+
+## Hva prosjektet dekker
+
+| Område | Hva jeg gjør |
 |---|---|
-| **Identity and access (IAM)** | Users, groups and roles in Microsoft Entra ID. Review of MFA, privileged roles, guest accounts and least privilege. |
-| **Compliance as code** | Azure Policy assignments mapped to recognised frameworks, with compliance measured automatically. |
-| **Cloud security posture** | Microsoft Defender for Cloud recommendations and secure score. |
-| **Automation** | Scripts that collect compliance and IAM data and produce a repeatable report. |
-| **Risk and advisory** | Risk assessment, prioritised findings and recommendations written for management. |
+| **Identitet og tilgang (IAM)** | Brukere, grupper og roller i Microsoft Entra ID. Gjennomgang av MFA, privilegerte roller, gjestekontoer og minste privilegium. |
+| **Compliance as code** | Azure Policy koblet mot anerkjente rammeverk, med automatisk måling av etterlevelse. |
+| **Sikkerhetsstatus i skyen** | Anbefalinger og secure score fra Microsoft Defender for Cloud. |
+| **Automatisering** | Script som henter ut data om etterlevelse og tilganger og lager en rapport som kan kjøres på nytt. |
+| **Risiko og rådgivning** | Risikovurdering, prioriterte funn og anbefalinger skrevet for ledelsen. |
 
-### Frameworks used
+### Rammeverk
 
-- **CIS Microsoft Azure Foundations Benchmark** for technical controls
-- **ISO/IEC 27001:2022** (Annex A) for mapping findings to an ISMS
-- **NSM Grunnprinsipper for IKT-sikkerhet** for a Norwegian context
-- **GDPR** where the findings touch personal data
-
----
-
-## Roadmap
-
-- [x] **Phase 1 – Foundation:** repository, scenario and company profile
-- [ ] **Phase 2 – Build the environment:** Entra ID users, groups and roles, plus a small set of Azure resources, including deliberate misconfigurations
-- [ ] **Phase 3 – Measure:** Azure Policy and Defender for Cloud against the chosen frameworks
-- [ ] **Phase 4 – Automate:** scripts for collecting compliance and IAM evidence
-- [ ] **Phase 5 – Assess:** risk assessment of the findings
-- [ ] **Phase 6 – Advise:** report with prioritised recommendations, then remediate and show before/after
+- **CIS Microsoft Azure Foundations Benchmark** for tekniske kontroller
+- **ISO/IEC 27001:2022** (vedlegg A) for å koble funn til et styringssystem for informasjonssikkerhet
+- **NSMs grunnprinsipper for IKT-sikkerhet** for norsk kontekst
+- **GDPR** der funnene berører personopplysninger
 
 ---
 
-## Repository structure
+## Veikart
+
+- [x] **Fase 1 – Grunnmur:** repo, scenario og bedriftsprofil
+- [ ] **Fase 2 – Bygge miljøet:** brukere, grupper og roller i Entra ID, pluss noen få Azure-ressurser, med bevisste feilkonfigurasjoner
+- [ ] **Fase 3 – Måle:** Azure Policy og Defender for Cloud mot de valgte rammeverkene
+- [ ] **Fase 4 – Automatisere:** script for innsamling av dokumentasjon om etterlevelse og tilganger
+- [ ] **Fase 5 – Vurdere:** risikovurdering av funnene
+- [ ] **Fase 6 – Gi råd:** rapport med prioriterte anbefalinger, deretter utbedring og før/etter
+
+---
+
+## Struktur
 
 ```
 azure-grc-lab/
 ├── README.md
 ├── docs/
-│   ├── 01-company-profile.md   # the fictional company and scope
-│   ├── 02-risk-assessment.md   # risks, likelihood, impact, treatment
-│   └── 03-report.md            # findings and recommendations for management
-├── scripts/                    # evidence collection (Python / PowerShell)
-├── policies/                   # Azure Policy definitions and assignments
-└── screenshots/                # evidence from the Azure portal
+│   ├── 01-virksomhet.md        # den fiktive bedriften og omfanget
+│   ├── 02-risikovurdering.md   # risikoer, sannsynlighet, konsekvens og tiltak
+│   └── 03-rapport.md           # funn og anbefalinger til ledelsen
+├── scripts/                    # innsamling av dokumentasjon (Python / PowerShell)
+├── policies/                   # Azure Policy-definisjoner og tildelinger
+└── screenshots/                # skjermbilder fra Azure-portalen
 ```
 
 ---
 
-## Cost and safety
+## Kostnad og sikkerhet
 
-- Runs on an **Azure for Students** subscription with a budget alert.
-- Compute is kept small and shut down when not in use.
-- No secrets, keys or tenant IDs are committed to this repository.
+- Kjører på et **Azure for Students**-abonnement med budsjettvarsling.
+- Virtuelle maskiner holdes små og skrus av når de ikke brukes.
+- Ingen hemmeligheter, nøkler eller tenant-ID-er legges i dette repoet.
 
 ---
 
-## About me
+## Om meg
 
-**Abshir Ahmed Arale**, final year bachelor's student in IT with a specialisation in cybersecurity at Høyskolen Kristiania, Oslo. Interested in GRC, cloud security and IAM, with the goal of working in security consulting.
+**Abshir Ahmed Arale**, siste år på Bachelor i informasjonsteknologi med fordypning i cybersikkerhet ved Høyskolen Kristiania i Oslo. Interessert i GRC, skysikkerhet og IAM, med mål om å jobbe med sikkerhetsrådgivning.
 
 - LinkedIn: [linkedin.com/in/abshir-arale](https://www.linkedin.com/in/abshir-arale)
 - GitHub: [github.com/Abshir-23](https://github.com/Abshir-23)
