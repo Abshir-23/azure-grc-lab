@@ -1,0 +1,13 @@
+# Never commit secrets or tenant details
+.env
+*.env
+*.pem
+*.key
+*.pfx
+secrets/
+**/credentials*
+*.tfstate
+*.tfstate.*
+__pycache__/
+.venv/
+output/
